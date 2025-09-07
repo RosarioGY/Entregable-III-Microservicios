@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Client Microservice API
+  description: API for managing customer data
+  version: 1.0.0
+
+tags:
+  - name: Client
+    description: Customer-related operations
+
+paths:
+  /clientes:
+    post:
+      tags: [Client]
+      summary: Registrar nuevo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientRequest'
+      responses:
+        '200':
+          description: Customer successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+        '400':
+          description: Invalid data
+        '500':
+          description: Internal server error
+
+    get:
+      tags: [Client]
+      summary: Listar todos los clientes
+      responses:
+        '200':
+          description: List of clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientResponse'
+
+  /clientes/{id}:
+    get:
+      tags: [Client]
+      summary: Obtener cliente por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Client found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+        '404':
+          description: Client not found
+
+    put:
+      tags: [Client]
+      summary: Actualizar cliente por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClientRequest'
+      responses:
+        '200':
+          description: Client successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+        '400':
+          description: Invalid data
+        '404':
+          description: Client not found
+        '409':
+          description: Email already in use
+
+    patch:
+      tags: [Client]
+      summary: Actualizar parcialmente cliente por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchClientRequest'
+      responses:
+        '200':
+          description: Client successfully patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+        '404':
+          description: Client not found
+
+    delete:
+      tags: [Client]
+      summary: Eliminar cliente por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Client deleted
+        '404':
+          description: Client not found
+
+components:
+  schemas:
+    CreateClientRequest:
+      type: object
+      required: [firstName, lastName, dni, email]
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dni:
+          type: string
+        email:
+          type: string
+          format: email
+
+    UpdateClientRequest:
+      type: object
+      required: [firstName, lastName, email]
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+
+    PatchClientRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dni:
+          type: string
+        email:
+          type: string
+          format: email
+
+    ClientResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dni:
+          type: string
+        email:
+          type: string
+          format: email

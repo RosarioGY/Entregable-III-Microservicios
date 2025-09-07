@@ -1,0 +1,25 @@
+# Profile: Development
+# Purpose: Local development environment with enhanced logging and debugging features
+
+spring:
+  application:
+    name: client-ms
+  data:
+    mongodb:
+      uri: mongodb+srv://rosario:${DB_PASSWORD}@cluster0.bgvqsrr.mongodb.net/banking?retryWrites=true&w=majority&appName=Cluster0
+      database: banking
+
+logging:
+  level:
+    '[com.bootcamp.clientms]': DEBUG
+    '[org.springframework.web]': DEBUG
+
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true

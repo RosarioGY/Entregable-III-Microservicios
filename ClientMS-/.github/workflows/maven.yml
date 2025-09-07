@@ -1,0 +1,36 @@
+name: Maven Build & Quality Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Validate code formatting
+        run: mvn formatter:validate
+
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
+
+      - name: Run tests
+        run: mvn test
+
+      - name: Generate coverage report
+        run: mvn jacoco:report
+
+      - name: Build project
+        run: mvn clean install

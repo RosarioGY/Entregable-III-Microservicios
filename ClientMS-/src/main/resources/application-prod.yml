@@ -1,0 +1,30 @@
+# Profile: Production
+# Purpose: Production environment with optimized performance and security
+
+spring:
+  application:
+    name: client-ms
+  profiles:
+    active: prod
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb+srv://rosario:${DB_PASSWORD}@cluster0.bgvqsrr.mongodb.net/banking?retryWrites=true&w=majority&appName=Cluster0}
+      database: banking
+
+# Logging configuration for production
+logging:
+  level:
+    '[com.bootcamp.clientms]': INFO
+    '[org.springframework.web]': WARN
+    '[org.springframework.security]': WARN
+    '[org.springframework.boot]': WARN
+
+server:
+  port: ${PORT:8080}
+
+# SpringDoc configuration for Swagger (disabled in production)
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

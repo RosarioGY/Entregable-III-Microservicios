@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: client-ms
+  data:
+    mongodb:
+      uri: mongodb+srv://rosario:${DB_PASSWORD}@cluster0.bgvqsrr.mongodb.net/banking?retryWrites=true&w=majority&appName=Cluster0
+      database: banking
+
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
