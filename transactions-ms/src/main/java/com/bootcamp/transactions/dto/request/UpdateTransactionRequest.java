@@ -1,7 +1,8 @@
-package com.bootcamp.clientms.dto.request;
+package com.bootcamp.transactions.dto.request;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateClientRequest {
-  @NotBlank(message = "First name is required")
-  private String firstName;
-  @NotBlank(message = "Last name is required")
-  private String lastName;
-  @NotBlank(message = "Email is required")
-  @Email(message = "Email must be valid")
-  private String email;
+public class UpdateTransactionRequest {
+    @NotBlank(message = "Source account ID is required")
+    private String sourceAccountId;
+
+    @NotBlank(message = "Target account ID is required")
+    private String targetAccountId;
+
+    @NotNull(message = "Amount is required")
+    @Positive(message = "Amount must be positive")
+    private Double amount;
 }

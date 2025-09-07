@@ -1,13 +1,13 @@
-package com.bootcamp.clientms.config;
+package com.bootcamp.transactions.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 /**
- * MongoDB configuration class. Enables MongoDB auditing for automatic timestamp management.
+ * Configuración de MongoDB. Habilita el auditing para gestión automática de timestamps.
  */
 @Configuration
 @EnableMongoAuditing
 public class MongoConfig {
-  // Auditing is enabled automatically for @CreatedDate and @LastModifiedDate annotations
+    // El auditing se habilita automáticamente para las anotaciones @CreatedDate y @LastModifiedDate
 }

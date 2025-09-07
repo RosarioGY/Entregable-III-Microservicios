@@ -1,6 +1,6 @@
-package com.bootcamp.clientms.dto.request;
+package com.bootcamp.transactions.dto.request;
 
-import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatchClientRequest {
+public class PatchTransactionRequest {
+    private String sourceAccountId;
+    private String targetAccountId;
 
-  private String firstName;
-  private String lastName;
-  private String dni;
-  @Email(message = "Email must be valid")
-  private String email;
+    @Positive(message = "El monto debe ser positivo")
+    private Double amount;
 }

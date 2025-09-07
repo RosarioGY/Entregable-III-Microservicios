@@ -1,20 +1,20 @@
 package com.bootcamp.transactions.api;
 
-import com.bootcamp.transactions.domain.Transaction;
-import com.bootcamp.transactions.service.TransactionService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.Data;
 
-@RestController
-@RequestMapping("/transacciones")
-@RequiredArgsConstructor
-public class TransactionController {
+import java.math.BigDecimal;
 
-    private final TransactionService service;
+@Data
+public class DepositRequest {
+    @NotBlank(message = "El ID de la cuenta es obligatorio")
+    private String accountId;
 
-    @PostMapping("/deposito")
-    public Mono<Transaction> deposit(@RequestBody DepositRequest request) {
-        return service.deposit(request);
-    }
-}
+    @NotNull(message = "El monto es obligatorio")
+    @Positive(message = "El monto debe ser positivo")
+    private BigDecimal amount;
+
+    @NotBlank(message = "La moneda es obligatoria")
+    private String currency;

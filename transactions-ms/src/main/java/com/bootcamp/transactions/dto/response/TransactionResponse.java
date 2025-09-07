@@ -1,6 +1,6 @@
-package com.bootcamp.clientms.dto.response;
+package com.bootcamp.transactions.dto.response;
 
-import com.bootcamp.clientms.domain.Client;
+import com.bootcamp.transactions.domain.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,15 +8,20 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientResponse {
-  private String id;
-  private String firstName;
-  private String lastName;
-  private String dni;
-  private String email;
+public class TransactionResponse {
+    private String id;
+    private String sourceAccountId;
+    private String targetAccountId;
+    private Double amount;
+    private String date;
 
-  public static ClientResponse from(Client client) {
-    return new ClientResponse(client.getId(), client.getFirstName(), client.getLastName(),
-        client.getDni(), client.getEmail());
-  }
+    public static TransactionResponse from(Transaction transaction) {
+        return new TransactionResponse(
+            transaction.getId(),
+            transaction.getSourceAccountId(),
+            transaction.getTargetAccountId(),
+            transaction.getAmount(),
+            transaction.getDate()
+        );
+    }
 }
