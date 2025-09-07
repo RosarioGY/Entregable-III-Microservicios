@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Transactions MS
+  version: 1.0.0
+paths:
+  /transacciones/deposito:
+    post:
+      summary: Registrar un depósito
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositRequest'
+      responses:
+        '201':
+          description: Creado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Transaction' }
+
+  /transacciones/retiro:
+    post:
+      summary: Registrar un retiro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WithdrawalRequest'
+      responses:
+        '201':
+          description: Creado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Transaction' }
+
+  /transacciones/transferencia:
+    post:
+      summary: Registrar una transferencia
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        '201':
+          description: Creado
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Transaction' }
+
+  /transacciones/historial:
+    get:
+      summary: Consultar historial de transacciones
+      parameters:
+        - in: query
+          name: cuenta
+          schema: { type: string }
+          required: false
+          description: Filtra por cuenta (origen o destino)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Transaction' }
+
+components:
+  schemas:
+    DepositRequest:
+      type: object
+      required: [cuenta, monto]
+      properties:
+        cuenta: { type: string }
+        monto: { type: number, format: double, minimum: 0.01 }
+    WithdrawalRequest:
+      type: object
+      required: [cuenta, monto]
+      properties:
+        cuenta: { type: string }
+        monto: { type: number, format: double, minimum: 0.01 }
+    TransferRequest:
+      type: object
+      required: [cuentaOrigen, cuentaDestino, monto]
+      properties:
+        cuentaOrigen: { type: string }
+        cuentaDestino: { type: string }
+        monto: { type: number, format: double, minimum: 0.01 }
+    Transaction:
+      type: object
+      properties:
+        id: { type: string }
+        type: { type: string, enum: [DEPOSITO, RETIRO, TRANSFERENCIA] }
+        amount: { type: number, format: double }
+        date: { type: string, format: date-time }
+        sourceAccount: { type: string }
+        destAccount: { type: string }

@@ -5,6 +5,9 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/transactions-ms/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/transactions-ms/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/TransactionsMS/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/TransactionsMS/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/TransactionsMS/src/test/java" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
