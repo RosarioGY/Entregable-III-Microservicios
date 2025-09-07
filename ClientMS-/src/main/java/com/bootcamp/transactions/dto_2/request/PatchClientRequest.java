@@ -1,0 +1,18 @@
+package com.bootcamp.transactions.dto_2.request;
+
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PatchClientRequest {
+
+  private String firstName;
+  private String lastName;
+  private String dni;
+  @Email(message = "Email must be valid")
+  private String email;
+}

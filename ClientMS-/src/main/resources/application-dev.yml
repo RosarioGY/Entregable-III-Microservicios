@@ -11,7 +11,7 @@ spring:
 
 logging:
   level:
-    '[com.bootcamp.clientms]': DEBUG
+    '[com.bootcamp.transactions]': DEBUG
     '[org.springframework.web]': DEBUG
 
 server:

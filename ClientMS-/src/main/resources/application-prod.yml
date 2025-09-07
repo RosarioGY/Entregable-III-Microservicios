@@ -14,7 +14,7 @@ spring:
 # Logging configuration for production
 logging:
   level:
-    '[com.bootcamp.clientms]': INFO
+    '[com.bootcamp.transactions]': INFO
     '[org.springframework.web]': WARN
     '[org.springframework.security]': WARN
     '[org.springframework.boot]': WARN
